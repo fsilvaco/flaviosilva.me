@@ -1,9 +1,36 @@
+import { useLoaderData } from "@remix-run/react";
+import { getPosts } from "~/api/notion";
 import type { LoaderFunction } from "@remix-run/node";
+import type { Post } from "~/types";
+import { Link } from "react-router-dom";
 
-export const loader: LoaderFunction = async ({ params }) => {
-  return {};
+export interface LoaderData {
+  posts: Post[];
+}
+
+export const loader: LoaderFunction = async () => {
+  const posts = await getPosts();
+  return {
+    posts: posts,
+  };
 };
 
 export default function () {
-  return <h1>hello</h1>;
+  const { posts } = useLoaderData<LoaderData>();
+
+  return (
+    <main>
+      <ul>
+        {posts.map(({ id, properties }) => (
+          <li key={id}>
+            <Link to={`post/${id}`}>
+              <article>
+                {properties.Name.title.map(({ plain_text }) => plain_text)}
+              </article>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </main>
+  );
 }
