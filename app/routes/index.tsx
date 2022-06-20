@@ -3,13 +3,16 @@ import { API } from "~/api/notion";
 import type { LoaderFunction } from "@remix-run/node";
 import type { Post } from "~/types";
 import { Link } from "react-router-dom";
+import { getReadyPosts } from "~/utils/getReadyPosts";
 
 export interface LoaderData {
   posts: Post[];
 }
 
 export const loader: LoaderFunction = async () => {
-  const posts = await API.getPosts();
+  const response = await API.getPosts();
+  // @ts-ignore
+  const { readyPosts: posts } = getReadyPosts(response);
 
   return {
     posts: posts,
