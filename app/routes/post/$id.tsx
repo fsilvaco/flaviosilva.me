@@ -3,7 +3,7 @@ import { Render } from "@9gustin/react-notion-render";
 import "@9gustin/react-notion-render/dist/index.css";
 import type { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { getBlocks, getPage } from "~/api/notion";
+import { API } from "~/api/notion";
 import type { Page } from "~/types";
 
 interface LoaderData {
@@ -13,8 +13,8 @@ interface LoaderData {
 
 export const loader: LoaderFunction = async ({ params }) => {
   const { id } = params;
-  const page = await getPage(id);
-  const blocks = await getBlocks(id);
+  const page = await API.getPage(id);
+  const blocks = await API.getBlocks(id);
 
   return {
     blocks: blocks,

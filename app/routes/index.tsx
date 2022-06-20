@@ -1,5 +1,5 @@
 import { useLoaderData } from "@remix-run/react";
-import { getPosts } from "~/api/notion";
+import { API } from "~/api/notion";
 import type { LoaderFunction } from "@remix-run/node";
 import type { Post } from "~/types";
 import { Link } from "react-router-dom";
@@ -9,7 +9,8 @@ export interface LoaderData {
 }
 
 export const loader: LoaderFunction = async () => {
-  const posts = await getPosts();
+  const posts = await API.getPosts();
+
   return {
     posts: posts,
   };
