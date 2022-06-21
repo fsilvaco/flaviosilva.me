@@ -6,7 +6,7 @@ export interface Post {
   created_by: CreatedBy;
   last_edited_by: LastEditedBy;
   cover: any;
-  icon: any;
+  icon?: Icon;
   parent: Parent;
   archived: boolean;
   properties: Properties;
@@ -23,23 +23,28 @@ export interface LastEditedBy {
   id: string;
 }
 
+export interface Icon {
+  type: string;
+  emoji: string;
+}
+
 export interface Parent {
   type: string;
   database_id: string;
 }
 
 export interface Properties {
-  Tags: Tags;
+  Status: Status;
   Name: Name;
 }
 
-export interface Tags {
+export interface Status {
   id: string;
   type: string;
-  multi_select: MultiSelect[];
+  status?: status;
 }
 
-export interface MultiSelect {
+export interface status {
   id: string;
   name: string;
   color: string;
