@@ -1,4 +1,4 @@
-export interface Post {
+export interface IPost {
   object: string;
   id: string;
   created_time: string;
@@ -11,6 +11,8 @@ export interface Post {
   archived: boolean;
   properties: Properties;
   url: string;
+  title: string;
+  slug: string;
 }
 
 export interface CreatedBy {

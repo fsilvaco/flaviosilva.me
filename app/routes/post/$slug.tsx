@@ -4,30 +4,33 @@ import "@9gustin/react-notion-render/dist/index.css";
 import type { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { API } from "~/api/notion";
-import type { Page } from "~/types";
+import type { IPost } from "~/types";
 
 interface LoaderData {
   blocks: NotionBlock[];
-  page: Page;
+  post: IPost;
 }
 
 export const loader: LoaderFunction = async ({ params }) => {
-  const { id } = params;
-  const page = await API.getPage(id);
-  const blocks = await API.getBlocks(id);
+  const { slug } = params;
+  const posts = await API.getPosts();
+
+  const post = posts.find((item) => item.slug === slug);
+
+  const blocks = await API.getBlocks(post?.id);
 
   return {
     blocks: blocks,
-    page: page,
+    post: post,
   };
 };
 
 export default function Post() {
-  const { blocks, page } = useLoaderData<LoaderData>();
+  const { blocks, post } = useLoaderData<LoaderData>();
 
   return (
     <div>
-      <h1>{page.properties.Name.title[0].plain_text}</h1>
+      <h1>{post.title}</h1>
       <Render blocks={blocks} classNames />
     </div>
   );
