@@ -1,8 +1,7 @@
-import { useLoaderData } from "@remix-run/react";
-import { API } from "~/api/notion";
+import { Link, useLoaderData } from "@remix-run/react";
 import type { LoaderFunction } from "@remix-run/node";
 import type { IPost } from "~/types";
-import { Link } from "react-router-dom";
+import { API } from "~/api/notion";
 
 export interface LoaderData {
   posts: IPost[];
