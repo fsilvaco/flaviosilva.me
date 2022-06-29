@@ -12,6 +12,7 @@ export class API {
   static getPosts = async () => {
     const response = await notion.databases.query({ database_id: databaseId })
     // @ts-ignore
+    // FIXME: Solved this Typescript problem
     const posts = getReadyPosts(response.results)
 
     posts.map(
