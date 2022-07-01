@@ -3,6 +3,8 @@ import { Render } from '@9gustin/react-notion-render'
 import type { LoaderFunction } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 
+import { Layout } from '~/components/Layout'
+
 import { API } from '~/api/notion'
 import { useTitle } from '~/hooks/use-title'
 import type { IPost } from '~/types'
@@ -33,9 +35,9 @@ export default function Post() {
   useTitle(post.title)
 
   return (
-    <div>
+    <Layout>
       <h1>{post.title}</h1>
       <Render blocks={blocks} classNames />
-    </div>
+    </Layout>
   )
 }

@@ -1,6 +1,8 @@
 import type { LoaderFunction } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
 
+import { Layout } from '~/components/Layout'
+
 import { API } from '~/api/notion'
 import type { IPost } from '~/types'
 
@@ -20,7 +22,7 @@ export default function () {
   const { posts } = useLoaderData<LoaderData>()
 
   return (
-    <main>
+    <Layout>
       <ul>
         {posts.map(({ id, title, slug }) => (
           <li key={id}>
@@ -30,6 +32,6 @@ export default function () {
           </li>
         ))}
       </ul>
-    </main>
+    </Layout>
   )
 }

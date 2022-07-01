@@ -8,6 +8,7 @@ import {
   ScrollRestoration,
 } from '@remix-run/react'
 
+import { ThemeProvider } from './context/use-theme'
 import styles from './tailwind.css'
 
 export const links: LinksFunction = () => {
@@ -20,7 +21,7 @@ export const meta: MetaFunction = () => ({
   viewport: 'width=device-width,initial-scale=1',
 })
 
-export default function App() {
+function App() {
   return (
     <html lang="en">
       <head>
@@ -38,5 +39,13 @@ export default function App() {
         <LiveReload />
       </body>
     </html>
+  )
+}
+
+export default function AppWithProviders() {
+  return (
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   )
 }
